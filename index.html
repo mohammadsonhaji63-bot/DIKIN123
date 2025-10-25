@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Biodata Diri - Mohammad Shodikin</title>
+
+  <!-- Font dan Icon -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+  <style>
+    /* 🌈 Variabel warna */
+    :root {
+      --bg1: #00c6ff;
+      --bg2: #0072ff;
+      --text-color: #222;
+      --card-color: #ffffff;
+      --accent-color: #0072ff;
+    }
+
+    body.dark-mode {
+      --bg1: #121212;
+      --bg2: #1e1e1e;
+      --text-color: #eaeaea;
+      --card-color: #1f1f1f;
+      --accent-color: #00c6ff;
+    }
+
+    /* 🌊 Background animasi */
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(-45deg, var(--bg1), var(--bg2), #23a6d5, #23d5ab);
+      background-size: 400% 400%;
+      animation: gradientMove 15s ease infinite;
+      color: var(--text-color);
+      transition: all 0.4s ease;
+      overflow-x: hidden;
+    }
+
+    @keyframes gradientMove {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    /* 🌟 Efek bintang jatuh */
+    canvas#stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      color: white;
+      padding: 20px;
+      background: rgba(0,0,0,0.3);
+      position: relative;
+      z-index: 2;
+    }
+
+    marquee {
+      font-size: 22px;
+      font-weight: 600;
+    }
+
+    /* Tombol mode */
+    .toggle-mode {
+      position: absolute;
+      right: 25px;
+      top: 25px;
+      background: white;
+      border: none;
+      border-radius: 25px;
+      padding: 8px 15px;
+      cursor: pointer;
+      font-weight: bold;
+      color: var(--accent-color);
+      box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+      transition: all 0.3s;
+      z-index: 2;
+    }
+
+    .toggle-mode:hover {
+      background: var(--accent-color);
+      color: white;
+    }
+
+    /* Kontainer utama */
+    .container {
+      position: relative;
+      z-index: 2;
+      width: 85%;
+      max-width: 950px;
+      background: var(--card-color);
+      margin: 40px auto;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      overflow: hidden;
+      padding: 35px 50px;
+      backdrop-filter: blur(10px);
+      transition: background 0.4s ease;
+    }
+
+    /* Bagian profil */
+    .profile {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .profile img {
+      width: 220px;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 20px;
+      border: 4px solid var(--accent-color);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: 0.4s;
+    }
+
+    .profile img:hover {
+      transform: scale(1.05);
+      border-color: #23d5ab;
+    }
+
+    table {
+      width: 60%;
+      font-size: 17px;
+      line-height: 1.8;
+    }
+
+    td:first-child {
+      font-weight: 600;
+      color: var(--accent-color);
+      width: 150px;
+    }
+
+    hr {
+      border: none;
+      height: 2px;
+      background: var(--accent-color);
+      margin: 25px 0;
+    }
+
+    /* Sosial media */
+    .sosmed {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .sosmed h3 {
+      color: var(--accent-color);
+      margin-bottom: 15px;
+    }
+
+    .social-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .social-item {
+      text-decoration: none;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      transition: all 0.3s;
+      min-width: 150px;
+      justify-content: center;
+      box-shadow: 0 0 15px rgba(255,255,255,0.2);
+    }
+
+    .social-item i {
+      font-size: 22px;
+    }
+
+    .social-item.fb { background: #1877f2; }
+    .social-item.ig { background: linear-gradient(45deg, #f09433, #dc2743, #cc2366, #bc1888); }
+    .social-item.tt { background: #000000; }
+    .social-item.yt { background: #ff0000; }
+
+    .social-item:hover {
+      transform: scale(1.07);
+      box-shadow: 0 0 25px rgba(255,255,255,0.6);
+    }
+
+    /* Efek glow neon */
+    .social-item:active {
+      box-shadow: 0 0 25px 5px var(--accent-color);
+      transform: scale(0.95);
+    }
+
+    /* Form pesan */
+    .form-biodata {
+      margin-top: 30px;
+      padding-top: 15px;
+    }
+
+    .form-biodata h3 {
+      text-align: center;
+      color: var(--accent-color);
+    }
+
+    .form-biodata input, .form-biodata textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #bbb;
+      border-radius: 8px;
+      font-size: 15px;
+      background-color: var(--card-color);
+      color: var(--text-color);
+      transition: 0.3s;
+    }
+
+    .form-biodata input:focus, .form-biodata textarea:focus {
+      border-color: var(--accent-color);
+      outline: none;
+    }
+
+    .form-biodata button {
+      display: block;
+      background: linear-gradient(135deg, var(--accent-color), #23d5ab);
+      color: white;
+      border: none;
+      padding: 10px 25px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      margin: 10px auto;
+      transition: 0.3s;
+    }
+
+    .form-biodata button:hover {
+      transform: scale(1.05);
+    }
+
+    /* Footer */
+    footer {
+      background: rgba(0,0,0,0.3);
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 30px;
+      font-size: 14px;
+      z-index: 2;
+      position: relative;
+    }
+
+    /* Tombol musik */
+    #music-control {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--accent-color);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 55px;
+      height: 55px;
+      font-size: 20px;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      transition: 0.3s;
+      z-index: 10;
+    }
+
+    #music-control:hover {
+      background: #23d5ab;
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="stars"></canvas>
+
+  <header>
+    <marquee>✨ BIODATA DIRI ✨</marquee>
+    <button class="toggle-mode" onclick="toggleMode()">🌙 Dark Mode</button>
+  </header>
+
+  <div class="container">
+    <div class="profile">
+      <table>
+        <tr><td>NIM</td><td>: 230101527</td></tr>
+        <tr><td>Nama</td><td>: Mohammad Shodikin</td></tr>
+        <tr><td>Kelas</td><td>: BD</td></tr>
+        <tr><td>Jurusan</td><td>: Teknik Informatika</td></tr>
+        <tr><td>Tempat/Tgl Lahir</td><td>: Tuban, 10 Agustus 2003</td></tr>
+        <tr><td>Agama</td><td>: Islam</td></tr>
+        <tr><td>Alamat</td><td>: Tuwiri Wetan, Merakurak, Tuban</td></tr>
+        <tr><td>Hobi</td><td>: Bermain Bola & Scroll TikTok</td></tr>
+        <tr><td>Cita-cita</td><td>: Pemain Bola Profesional</td></tr>
+        <tr><td>No. Telepon</td><td>: 0852-9847-0706</td></tr>
+      </table>
+
+      <img src="fotoku.jpg" alt="Foto Diri">
+    </div>
+
+    <hr>
+
+    <div class="sosmed">
+      <h3>🌐 Temukan Saya di Sosial Media</h3>
+      <div class="social-links">
+        <a href="https://facebook.com/" target="_blank" class="social-item fb" onclick="playClick()">
+          <i class="fab fa-facebook"></i>
+          <span>FB</span>
+        </a>
+        <a href="https://instagram.com/" target="_blank" class="social-item ig" onclick="playClick()">
+          <i class="fab fa-instagram"></i>
+          <span>IG</span>
+        </a>
+        <a href="https://tiktok.com/" target="_blank" class="social-item tt" onclick="playClick()">
+          <i class="fab fa-tiktok"></i>
+          <span>TikTok</span>
+        </a>
+        <a href="https://youtube.com/" target="_blank" class="social-item yt" onclick="playClick()">
+          <i class="fab fa-youtube"></i>
+          <span>Youtube</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="form-biodata">
+      <h3>💬 Kirim Pesan untuk Saya</h3>
+      <form onsubmit="playClick(); return false;">
+        <label>Nama:</label>
+        <input type="text" placeholder="Masukkan nama kamu">
+        <label>Email:</label>
+        <input type="email" placeholder="Masukkan email kamu">
+        <label>Pesan:</label>
+        <textarea rows="4" placeholder="Tulis pesan kamu di sini..."></textarea>
+        <button type="submit">Kirim Pesan</button>
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    © 2025 - Biodata Pribadi Mohammad Shodikin | Dibuat dengan ❤️ menggunakan HTML, CSS, dan JS
+  </footer>
+
+  <!-- Musik Latar -->
+  <audio id="music" src="musiku.mp3" loop></audio>
+  <audio id="clickSound" src="click.mp3"></audio>
+  <button id="music-control" onclick="toggleMusic()">
+    <i class="fas fa-volume-up"></i>
+  </button>
+
+  <script>
+    // Mode gelap/terang
+    function toggleMode() {
+      const body = document.body;
+      const button = document.querySelector('.toggle-mode');
+      body.classList.toggle('dark-mode');
+      button.textContent = body.classList.contains('dark-mode') ? '☀️ Light Mode' : '🌙 Dark Mode';
+    }
+
+    // Kontrol Musik
+    const music = document.getElementById('music');
+    const musicButton = document.getElementById('music-control');
+    let isPlaying = false;
+
+    function toggleMusic() {
+      if (isPlaying) {
+        music.pause();
+        musicButton.innerHTML = '<i class="fas fa-volume-mute"></i>';
+      } else {
+        music.play();
+        musicButton.innerHTML = '<i class="fas fa-volume-up"></i>';
+      }
+      isPlaying = !isPlaying;
+    }
+
+    // Mulai musik setelah klik pertama
+    document.body.addEventListener('click', function() {
+      if (!isPlaying) {
+        music.play();
+        isPlaying = true;
+      }
+    }, { once: true });
+
+    // Efek suara klik tombol
+    const clickSound = document.getElementById('clickSound');
+    function playClick() {
+      clickSound.currentTime = 0;
+      clickSound.play();
+    }
+
+    // Efek bintang jatuh ✨
+    const canvas = document.getElementById('stars');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+    let width, height;
+
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    function createStar() {
+      return {
+        x: Math.random() * width,
+        y: Math.random() * height,
+        size: Math.random() * 2,
+        speed: Math.random() * 2 + 0.5
+      };
+    }
+
+    for (let i = 0; i < 150; i++) stars.push(createStar());
+
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+      ctx.fillStyle = 'white';
+      stars.forEach(star => {
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+        ctx.fill();
+        star.y += star.speed;
+        if (star.y > height) {
+          star.x = Math.random() * width;
+          star.y = 0;
+        }
+      });
+      requestAnimationFrame(animate);
+    }
+    animate();
+  </script>
+</body>
+</html>
